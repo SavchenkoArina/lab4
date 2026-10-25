@@ -1,0 +1,40 @@
+### 1. Создать пользователя (User)
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Арина Савченко",
+  "email": "arina@example.com"
+}
+
+### 2. Создать помещение (Premise)
+POST http://localhost:8080/api/premises
+Content-Type: application/json
+
+{
+  "address": "ул. Ленина, д. 10, кв. 5",
+  "area": 54.5,
+  "owner": {
+    "id": 1
+  }
+}
+
+### 3. Создать счётчик (Meter)
+POST http://localhost:8080/api/meters
+Content-Type: application/json
+
+{
+  "premise": {
+    "id": 1
+  },
+  "resourceType": "Water",
+  "serialNumber": "WTR-12345",
+  "tariffPerUnit": 45.5,
+  "status": "ACTIVE"
+}
+
+### 4. Вызвать БИЗНЕС-ОПЕРАЦИЮ
+POST http://localhost:8080/api/meter-readings/submit-with-charge?meterId=1&value=12.5&period=2026-10
+
+### 5. Посмотреть все начисления (Utility Charges), которые создались автоматически
+GET http://localhost:8080/api/utility-charges
